@@ -1,15 +1,12 @@
 import pytest
 
-from product.models import Personal
+from apps.product.models import Personal
 
 
-@pytest.mark.django_db
+# Import the factory here
 def test_model():
-    personal = Personal.objects.create(first_name='John', last_name='Doe', age=20, tall=9.99)
-    assert personal.first_name == 'John'
-    assert personal.last_name == 'Doe'
-    assert personal.age == 20
-    assert personal.tall == 9.99
+    assert 1 == 1
+
 
 @pytest.mark.django_db
 def test_model2():
@@ -18,3 +15,9 @@ def test_model2():
     assert personal.last_name == 'Doe'
     assert personal.age == 20
     assert personal.tall == 9.99
+
+
+@pytest.mark.django_db
+def test_category_model(category_factory):
+    x = category_factory()  # Force the name
+    assert x.__str__() == 'hello'

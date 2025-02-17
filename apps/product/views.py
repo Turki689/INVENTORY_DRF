@@ -4,7 +4,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .serializers import *
+from apps.product.serializers.serializers import *
 
 
 class ProductListCreateAPIView(ListCreateAPIView):

@@ -39,9 +39,10 @@ INSTALLED_APPS = [
     'pytest',
     'drf_yasg',
     'mptt',
-    'product'
+    'apps.product',
 
 ]
+MPTT_DEFAULT_LEVEL_INDICATOR = '--'  # Or whatever you want
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
