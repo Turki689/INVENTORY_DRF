@@ -1,0 +1,17 @@
+# Ignore Python virtual environments
+venv/
+*.venv/
+idea/
+*.idea/
+# Ignore environment files
+inventory/.env
+
+# Ignore SQLite database files
+*.sqlite
+*.sqlite3
+
+# Ignore Python cache directories
+**/__pycache__/
+__pycache__/
+
+pytest.ini
