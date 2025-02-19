@@ -1,21 +1,11 @@
 # Create your models here.
 from django.db import models
-from mptt.models import MPTTModel, TreeForeignKey
+
+from apps.category.models import Category
 
 
 class Brand(models.Model):
     name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
-
-class Category(MPTTModel):
-    name = models.CharField(max_length=255)
-    parent = TreeForeignKey('self', on_delete=models.PROTECT, related_name='children', null=True, blank=True, )
-
-    class MPTTMeta:
-        order_insertion_by = ['name']
 
     def __str__(self):
         return self.name
@@ -44,5 +34,6 @@ class Personal(models.Model):
     last_name = models.CharField(max_length=255)
     age = models.IntegerField()
     tall = models.DecimalField(max_digits=3, decimal_places=2)
+
     def __str__(self):
         return self.first_name

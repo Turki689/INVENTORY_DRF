@@ -1,5 +1,5 @@
 """
-URL configuration for inventory project.
+URL configuration for config project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -21,7 +21,7 @@ from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
 
-from apps.product.views import CategoryViewSet
+# from apps.product.views import CategoryViewSet
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -36,13 +36,14 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
-router = DefaultRouter()
-router.register(r'Category', CategoryViewSet)
+# router = DefaultRouter()
+# router.register(r'Category', CategoryViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.product.urls')),
-    path('api/', include(router.urls)),
+    path('', include('apps.category.urls'))
+    # path('api/', include(router.urls)),
     # path('api/schema/',SpectacularAPIView.as_view(),name='schema'),
     # path('api/schema/docs/',SpectacularSwaggerView.as_view(url_name='schema'))
 

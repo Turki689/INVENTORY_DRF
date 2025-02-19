@@ -4,9 +4,6 @@ from apps.product.models import Personal
 
 
 # Import the factory here
-def test_model():
-    assert 1 == 1
-
 
 @pytest.mark.django_db
 def test_model2():
@@ -19,5 +16,19 @@ def test_model2():
 
 @pytest.mark.django_db
 def test_category_model(category_factory):
-    x = category_factory()  # Force the name
-    assert x.__str__() == 'hello'
+    z = category_factory()
+    assert z.__str__() == 'category'
+
+
+@pytest.mark.django_db
+def test_brand_model(brand_factory):
+    x = brand_factory()
+    assert x.__str__() == 'brand'
+
+
+@pytest.mark.django_db
+def test_product_model(product_factory):
+    name = product_factory()
+    assert name.__str__() == 'product'
+
+#finishing the __str__ function test

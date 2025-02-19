@@ -1,20 +1,17 @@
 from django.db import transaction
 from rest_framework import serializers
 
-from apps.product.models import Category,Brand,Product
+from apps.category.models import Category
+from apps.category.serializers.fields import CategoryField
+from apps.product.models import Brand, Product
 from .fields import BrandCateforyField
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['name', 'id']
 
 
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
         fields = ['name', 'id']
+
 
 # class ProductSerializers(serializers.ModelSerializer):
 #     brand = serializers.CharField()
@@ -52,9 +49,10 @@ class BrandSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     brand = BrandCateforyField(queryset=Brand.objects.all())
-    category = BrandCateforyField(queryset=Category.objects.all())
+    category = CategoryField(queryset=Category.objects.all())
+
     class Meta:
-        model= Product
+        model = Product
         fields = ["id", "name", "brand", "category"]
 
     @transaction.atomic
@@ -68,4 +66,3 @@ class ProductSerializer(serializers.ModelSerializer):
         instance.category = validated_data.get("category", instance.category)
         instance.save()
         return instance
-
