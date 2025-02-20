@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -38,15 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #external
+    # external
     'rest_framework',
     'pytest',
     'drf_yasg',
     'mptt',
     'django_filters',
-    #apps
+    # apps
     'apps.product',
-    'apps.category'
+    'apps.category',
+    'apps.product_line'
 
 ]
 MPTT_DEFAULT_LEVEL_INDICATOR = '--'  # Or whatever you want

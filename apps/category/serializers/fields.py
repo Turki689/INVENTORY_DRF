@@ -9,3 +9,6 @@ class CategoryField(serializers.RelatedField):
         if isinstance(data, int):
             return self.queryset.objects.get(pk=data)
         return self.queryset.get_or_create(name=data)[0]
+
+
+

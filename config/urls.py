@@ -40,8 +40,9 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('apps.product.urls')),
-    path('api/', include('apps.category.urls'))
+    path('api/v1/', include('apps.product.urls')),
+    path('api/v1/categories', include('apps.category.urls')),
+    path('api/v1/productlines', include('apps.product_line.urls')),
     # path('api/', include(router.urls)),
     # path('api/schema/',SpectacularAPIView.as_view(),name='schema'),
     # path('api/schema/docs/',SpectacularSwaggerView.as_view(url_name='schema'))
