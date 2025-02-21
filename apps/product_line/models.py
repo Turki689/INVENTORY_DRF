@@ -11,6 +11,7 @@ class ProductLine(models.Model):
     sku = models.CharField(max_length=120)
     is_active = models.BooleanField(default=False)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_lines')
+    slug = models.SlugField(max_length=120, unique=True)
 
     def __str__(self):
         return self.name

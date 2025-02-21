@@ -25,6 +25,7 @@ class ProductListCreateAPIView(ListCreateAPIView):
 class ProductDetail(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    lookup_field = 'slug'
 
 
 @swagger_auto_schema(tags=["Products"])
