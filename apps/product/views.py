@@ -1,13 +1,12 @@
 # Create your views here.
 from django_filters.rest_framework import DjangoFilterBackend
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 
 from apps.product.serializers.serializers import *
+from apps.product_line.models import ProductLine
 
 
-@swagger_auto_schema(tags=["Products"])
 class ProductListCreateAPIView(ListCreateAPIView):
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
@@ -21,30 +20,35 @@ class ProductListCreateAPIView(ListCreateAPIView):
     queryset = Product.objects.all()
 
 
-@swagger_auto_schema(tags=["Products"])
 class ProductDetail(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'slug'
 
 
-@swagger_auto_schema(tags=["Products"])
 class BrandListAPIView(ListCreateAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
 
 
-@swagger_auto_schema(tags=["Products"])
 class BrandDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
 
 
-@swagger_auto_schema(tags=["Products"])
 class ProductFilterAPIView(ListAPIView):
     serializer_class = ProductSerializer
 
     def get_queryset(self):
         category = self.kwargs['category_id']
         queryset = Product.objects.filter(category=category)
+        return queryset
+
+
+class ProductlinesFromProduct(ListCreateAPIView):
+    serializer_class = ProductLineFiledsSerializer
+
+    def get_queryset(self):
+        product_slug = self.kwargs['slug']
+        queryset = ProductLine.objects.select_related("product").filter(product__slug=product_slug)
         return queryset

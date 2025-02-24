@@ -1,4 +1,5 @@
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+
 from apps.category.models import Category
 from apps.category.serializers.category_serializer import CategorySerializer
 
@@ -17,4 +18,8 @@ class CategoryListCreateAPIView(ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-# Create your views here.
+
+class CategoryDetailAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    lookup_field = 'slug'  # Create your views here.
