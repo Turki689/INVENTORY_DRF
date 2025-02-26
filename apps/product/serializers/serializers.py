@@ -4,13 +4,8 @@ from rest_framework import serializers
 from apps.category.models import Category
 from apps.category.serializers.fields import CategoryField
 from apps.product.models import Brand, Product
-from .fields import BrandCateforyField
-
-
-class BrandSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Brand
-        fields = ['name', 'id']
+from ...brand.serializers.brand_fields import BrandFiledSerializer
+from ...product_line.serializers.product_line_fileds import ProductLineFiledsSerializer
 
 
 # class ProductSerializers(serializers.ModelSerializer):
@@ -48,12 +43,13 @@ class BrandSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    brand = BrandCateforyField(queryset=Brand.objects.all())
+    brand = BrandFiledSerializer(queryset=Brand.objects.all())
     category = CategoryField(queryset=Category.objects.all())
+    product_lines = ProductLineFiledsSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
-        fields = ["id", "name", "brand", "category"]
+        fields = ["id", "name", "brand", "category", 'product_lines', 'brand']
 
     @transaction.atomic
     def create(self, validated_data):

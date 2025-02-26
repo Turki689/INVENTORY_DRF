@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -38,15 +40,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #external
+    # external
     'rest_framework',
     'pytest',
     'drf_yasg',
     'mptt',
     'django_filters',
-    #apps
+    'rest_framework_simplejwt',
+    # apps
     'apps.product',
-    'apps.category'
+    'apps.category',
+    'apps.product_line',
+    'apps.brand'
 
 ]
 MPTT_DEFAULT_LEVEL_INDICATOR = '--'  # Or whatever you want
@@ -132,4 +137,16 @@ REST_FRAMEWORK = {
 
     ],
 
+}
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "AUTH_HEADER_TYPES": ("Bearer",),
 }
