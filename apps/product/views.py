@@ -26,17 +26,7 @@ class ProductDetail(RetrieveUpdateDestroyAPIView):
     lookup_field = 'slug'
 
 
-class BrandListAPIView(ListCreateAPIView):
-    queryset = Brand.objects.all()
-    serializer_class = BrandSerializer
-
-
-class BrandDetailAPIView(RetrieveUpdateDestroyAPIView):
-    queryset = Brand.objects.all()
-    serializer_class = BrandSerializer
-
-
-class ProductFilterAPIView(ListAPIView):
+class ProductFromCategory(ListAPIView):
     serializer_class = ProductSerializer
 
     def get_queryset(self):
@@ -51,4 +41,14 @@ class ProductlinesFromProduct(ListCreateAPIView):
     def get_queryset(self):
         product_slug = self.kwargs['slug']
         queryset = ProductLine.objects.select_related("product").filter(product__slug=product_slug)
+        return queryset
+
+
+# filter the products from the brand
+class ProductFromBrand(ListCreateAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        brand_slug = self.kwargs['brand_slug']
+        queryset = Product.objects.select_related("brand").filter(brand__slug=brand_slug)
         return queryset

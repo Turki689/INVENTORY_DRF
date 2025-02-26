@@ -2,14 +2,8 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 
+from apps.brand.models import Brand
 from apps.category.models import Category
-
-
-class Brand(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
 
 
 class Product(models.Model):
@@ -27,20 +21,4 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
-
-
-class Person(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    email = models.EmailField()
-
-
-class Personal(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    age = models.IntegerField()
-    tall = models.DecimalField(max_digits=3, decimal_places=2)
-
-    def __str__(self):
-        return self.first_name
+        return self.slug

@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     # apps
     'apps.product',
     'apps.category',
-    'apps.product_line'
+    'apps.product_line',
+    'apps.brand'
 
 ]
 MPTT_DEFAULT_LEVEL_INDICATOR = '--'  # Or whatever you want
